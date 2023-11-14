@@ -91,6 +91,12 @@
     <Compile Include="User.cs">
       <DependentUpon>ModelProduct.tt</DependentUpon>
     </Compile>
+    <Compile Include="View\AddDataWin.xaml.cs">
+      <DependentUpon>AddDataWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditDataWin.xaml.cs">
+      <DependentUpon>EditDataWin.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,6 +111,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Styles\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddDataWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditDataWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,6 +170,7 @@
     <Resource Include="Images\picture.png" />
     <Resource Include="Images\Y354G6.jpg" />
     <Resource Include="Images\А112Т4.jpg" />
+    <Resource Include="Images\weapon.jpg" />
     <Content Include="ModelProduct.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelProduct.Context.cs</LastGenOutput>

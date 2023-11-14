@@ -192,7 +192,7 @@
                             </StackPanel>
                         </ScrollViewer>
                     </Border>
-                    
+
                     <Border Name="ProductBorder" Style="{StaticResource ContentBorder}">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -207,24 +207,31 @@
                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 <TextBox x:Name="filter" Width="150" TextChanged="filter_TextChanged"
                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Button x:Name="addButton" Content="Добавить" Click="addButton_Click"/>
+                                <Button Content="Edit" x:Name="editButton"  Width="150" 
+                                        VerticalAlignment="Center" Click="editButton_Click"/>
+                                <Button Content="Delete" x:Name="delButton" Width="150" 
+                                        VerticalAlignment="Center" Click="delButton_Click"/>
                             </StackPanel>
 
 
-                            <ScrollViewer Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                          PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
                                 <ListView x:Name="listView1" FontSize="18">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Margin="5">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="2*"/>
-                                                    <ColumnDefinition Width="4*"/>
-                                                    <ColumnDefinition Width="4*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="50"/>
                                                 </Grid.ColumnDefinitions>
-                                                
+
                                                 <Image Source="{Binding CurectImage}" Grid.Column="0" 
                                                    HorizontalAlignment="Center" VerticalAlignment="Center"
                                                    ></Image>
-                                                
+
                                                 <StackPanel Grid.Column="1">
                                                     <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Margin="15 0 0 15"/>
 
@@ -251,7 +258,7 @@
                                                         <Run Text="{Binding Quantity}"></Run>
                                                     </TextBlock>
                                                 </StackPanel>
-                                                
+
                                                 <StackPanel Grid.Column="2">
                                                     <TextBlock Text="{Binding Description}" Margin="15 0 0 15"/>
                                                     <TextBlock Text="{Binding Articul}" Margin="15 0 0 15"/>
@@ -263,7 +270,6 @@
                             </ScrollViewer>
                         </Grid>
                     </Border>
-                    
                 </Grid>
 			</Border>
 		</Grid>

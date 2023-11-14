@@ -11,10 +11,12 @@ namespace AddNReadApp
 {
     using System;
     using System.Collections.Generic;
+	using System.ComponentModel;
 	using System.Windows.Media;
 
-	public partial class Product
-    {
+	public partial class Product : INotifyPropertyChanged
+	{
+		private string _image;
         public int ID { get; set; }
         public string Articul { get; set; }
         public string Name { get; set; }
@@ -26,19 +28,36 @@ namespace AddNReadApp
         public Nullable<int> Current_discount { get; set; }
         public Nullable<int> Quantity { get; set; }
         public string Description { get; set; }
-        public string CurectImage 
-        {
-            get
-            {
-                if (String.IsNullOrEmpty(Image) || String.IsNullOrWhiteSpace(Image))
-                {
-                    return $"Images/picture.png";
-                }
-                else
-                    return $"Images/{Image}";
+		public string CurectImage
+		{
+			get
+			{
+				if (String.IsNullOrEmpty(Image) || String.IsNullOrWhiteSpace(Image))
+				{
+					return "Images/picture.png";
+				}
+				else
+				{
+					return $"Images/{Image}";
+				}
+			}
+		}
 
-            }
-        }
-        public string Image { get; set; }
-    }
+		public string Image
+		{
+			get { return _image; }
+			set
+			{
+				_image = value;
+				OnPropertyChanged(nameof(CurectImage));
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
 }

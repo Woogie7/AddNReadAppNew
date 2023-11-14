@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AddNReadApp.View;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,17 +15,20 @@ namespace AddNReadApp
 	{
 		private List<Border> borders = new List<Border>();
 
+		public static ListView listViewPub;
+
+		Entities _db = new Entities();
+
 		private MainApp app = new MainApp();
 
 		public MainWindow()
 		{
 			InitializeComponent();
 
-			Database.modelDb = new Entities();
+			listView1.ItemsSource = _db.Product.ToList();
+			listViewPub = listView1;
 
-			listView1.ItemsSource = Database.modelDb.Product.ToList();
-
-			sortProp.ItemsSource = new string[] { "Name", "Price"};
+			sortProp.ItemsSource = new string[] { "Name", "Price" };
 			sortDir.ItemsSource = Enum.GetNames(typeof(ListSortDirection));
 			sortProp.SelectionChanged += SelectionChanged;
 			sortDir.SelectionChanged += SelectionChanged;
@@ -42,17 +46,8 @@ namespace AddNReadApp
 
 			return FilterObj.Name.Contains(filter.Text);
 		}
-		//private bool PriceFilter(object obj)
-		//{
-		//	var FilterObj = obj as Product;
 
-		//	return FilterObj.Price.
-		//}
-
-		//public Predicate<object> GetFilters()
-		//{
-		//	return
-		//}
+		
 
 		private void SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
@@ -164,14 +159,14 @@ namespace AddNReadApp
 						{
 							User userObj = new User()
 							{
-								ID = Database.modelDb.User.Max(x => x.ID) + 1,
+								ID = _db.User.Max(x => x.ID) + 1,
 								Login = login,
 								Password = password,
 								Name = name,
 								IDrole = 2
 							};
-							Database.modelDb.User.Add(userObj);
-							Database.modelDb.SaveChanges();
+							_db.User.Add(userObj);
+							_db.SaveChanges();
 
 							MessageBox.Show("Поздравляем! Теперь вы можете войти!»", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
 							Show(LogInBorder);
@@ -208,7 +203,7 @@ namespace AddNReadApp
 				{
 					if (!string.IsNullOrEmpty(password) && 3 <= password.Length && password.Length <= 50)
 					{
-						var userDb = Database.modelDb.User.FirstOrDefault(x => x.Login == login && x.Password == password);
+						var userDb = _db.User.FirstOrDefault(x => x.Login == login && x.Password == password);
 						if (userDb.ID != 0)
 						{
 							app.User = userDb;
@@ -236,6 +231,53 @@ namespace AddNReadApp
 			{
 				MessageBox.Show("Пользователь не найден");
 			}
+		}
+
+		private void addButton_Click(object sender, RoutedEventArgs e)
+		{
+			AddDataWin addDataWin = new AddDataWin();
+			addDataWin.ShowDialog();
+		}
+
+		private void editButton_Click(object sender, RoutedEventArgs e)
+		{
+			try
+			{
+				int ID = (listView1.SelectedItem as Product).ID;
+				EditDataWin editDataWin = new EditDataWin(ID);
+				editDataWin.ShowDialog();
+			}
+			catch 
+			{
+				MessageBox.Show("Выберите поле которое хотите изменить", "ВНИМАНИЕ!!!");
+			}
+		}
+
+		private void delButton_Click(object sender, RoutedEventArgs e)
+		{
+			try
+			{
+				int ID = (listView1.SelectedItem as Product).ID;
+				Product deleteProduct = (from m in _db.Product where m.ID == ID select m).Single();
+				_db.Product.Remove(deleteProduct);
+				_db.SaveChanges();
+				listViewPub.ItemsSource = _db.Product.ToList();
+				MessageBox.Show("Удаление прошло удачно", "Сообщение", MessageBoxButton.OK);
+			}
+			catch
+			{
+				MessageBox.Show("Выберите поле которое хотите удалить", "ВНИМАНИЕ!!!");
+			}
+		}
+
+		private void ScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+		{
+			ScrollViewer scrollviewer = sender as ScrollViewer;
+			if (e.Delta > 0)
+				scrollviewer.LineDown();
+			else
+				scrollviewer.LineUp();
+			e.Handled = true;
 		}
 	}
 }
