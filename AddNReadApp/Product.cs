@@ -9,12 +9,13 @@
 
 namespace AddNReadApp
 {
-    using System;
+	using AddNReadApp.Core;
+	using System;
     using System.Collections.Generic;
 	using System.ComponentModel;
 	using System.Windows.Media;
 
-	public partial class Product : INotifyPropertyChanged
+	public partial class Product : ObservaleObject
 	{
 		private string _image;
         public int ID { get; set; }
@@ -51,13 +52,6 @@ namespace AddNReadApp
 				_image = value;
 				OnPropertyChanged(nameof(CurectImage));
 			}
-		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected virtual void OnPropertyChanged(string propertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

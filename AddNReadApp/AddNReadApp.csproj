@@ -66,6 +66,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\ObservaleObject.cs" />
+    <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="ModelProduct.Context.cs">
       <AutoGen>True</AutoGen>
@@ -94,6 +96,9 @@
     <Compile Include="View\AddDataWin.xaml.cs">
       <DependentUpon>AddDataWin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Control\InputForm.xaml.cs">
+      <DependentUpon>InputForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditDataWin.xaml.cs">
       <DependentUpon>EditDataWin.xaml</DependentUpon>
     </Compile>
@@ -114,7 +119,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\TextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddDataWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Control\InputForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

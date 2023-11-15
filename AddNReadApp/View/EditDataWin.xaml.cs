@@ -112,5 +112,10 @@ namespace AddNReadApp.View
 			string startupPath = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
 			return startupPath;
 		}
+
+		private void btnExit_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+		}
 	}
 }

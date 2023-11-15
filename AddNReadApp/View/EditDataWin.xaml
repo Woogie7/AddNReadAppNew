@@ -5,84 +5,130 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AddNReadApp.View"
         mc:Ignorable="d"
-        Title="EditDataWin" Height="500" Width="500"
+        Title="EditDataWin" Height="600" Width="750"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="#EB7D42"
+        AllowsTransparency="True"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="3" Text="Изменение" 
-                   VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20"
-                   FontSize="16"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
 
-        <StackPanel>
-            <Button Content="Выбор фото" Height="50" Width="100" Click="Button_Click"
-                    Margin="20 100 20 20"/>
-            <Image x:Name="pictureAdd" Margin="5" Width="150" Height="100"/>
-            <TextBlock Text="Name" Margin="20 10 20 0"/>
-            <TextBox Margin="20 10 20 0" x:Name="TBName"/>
+        <Border Background="#2C2C2C" Grid.ColumnSpan="3" Grid.Row="0">
+            <TextBlock Text="Изменение" 
+            VerticalAlignment="Center" HorizontalAlignment="Center"
+            FontSize="16" Foreground="#B6E7FD"/>
+        </Border>
+       
+
+        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Выбор фото" Height="50" Width="100" Click="Button_Click" Style="{StaticResource secoundaryButtonStyle}"/>
+            <Image x:Name="pictureAdd" Margin="5" Width="190" Height="150"/>
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top" Text="Name" FontSize="16" Margin="40 5 5 5"/>
+                <TextBox DockPanel.Dock="Bottom" Style="{StaticResource MainTextBoxStyle}" x:Name="TBName" 
+                         VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top" Text="Price" FontSize="16" Margin="40 5 5 5"/>
+                <TextBox DockPanel.Dock="Bottom" Style="{StaticResource MainTextBoxStyle}" x:Name="TBPrice" 
+                         VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </DockPanel>
+
         </StackPanel>
 
-        <Border Grid.Column="1" Background="Aqua"
-                Margin="20 100 20 20"
-                HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="5*"/>
-                </Grid.ColumnDefinitions>
+        <Border Grid.Column="1" Grid.Row="1" Background="#2C2C2C"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="5">
-                    <TextBlock Text="Price" Margin="2"/>
-                    <TextBlock Text="Max_discount" Margin="2"/>
-                    <TextBlock Text="Current_discount" Margin="2"/>
-                    <TextBlock Text="Provider" Margin="2"/>
-                    <TextBlock Text="Manufacturer" Margin="2"/>
-                    <TextBlock Text="Category" Margin="2"/>
-                    <TextBlock Text="Quantity" Margin="2"/>
-                </StackPanel>
-
-                <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Margin="5">
-                    <TextBox Margin="2" x:Name="TBPrice"/>
-                    <TextBox Margin="2" x:Name="TBMax_discount"/>
-                    <TextBox Margin="2" x:Name="TBCurrent_discount"/>
-                    <TextBox Margin="2" x:Name="TBProvider"/>
-                    <TextBox Margin="2" x:Name="TBManufacturer"/>
-                    <TextBox Margin="2" x:Name="TBCategory"/>
-                    <TextBox Margin="2" x:Name="TBQuantity"/>
-                </StackPanel>
-            </Grid>
+            <StackPanel Orientation="Vertical" Margin="10">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Max_discount" Margin="8 2 2 2"
+                               Foreground="#B6E7FD"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox DockPanel.Dock="Right" Margin="5" HorizontalAlignment="Left"
+                             x:Name="TBMax_discount" Style="{StaticResource MainTextBoxStyle}"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Current_discount" Margin="8 2 2 2"
+                               Foreground="#B6E7FD"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox DockPanel.Dock="Right" Margin="5" HorizontalAlignment="Left"
+                             x:Name="TBCurrent_discount" Style="{StaticResource MainTextBoxStyle}"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Provider" Margin="8 2 2 2"
+                               Foreground="#B6E7FD"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox DockPanel.Dock="Right" Margin="5" HorizontalAlignment="Left"
+                             x:Name="TBProvider" Style="{StaticResource MainTextBoxStyle}"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Manufacturer" Margin="8 2 2 2"
+                               Foreground="#B6E7FD"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox DockPanel.Dock="Right" Margin="5" HorizontalAlignment="Left"
+                             x:Name="TBManufacturer" Style="{StaticResource MainTextBoxStyle}"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Category" Margin="8 2 2 2"
+                               Foreground="#B6E7FD"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox DockPanel.Dock="Right" Margin="5" HorizontalAlignment="Left"
+                             x:Name="TBCategory" Style="{StaticResource MainTextBoxStyle}"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Quantity" Margin="2"
+                               Foreground="#B6E7FD"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBox DockPanel.Dock="Right" Margin="5" HorizontalAlignment="Center"
+                             x:Name="TBQuantity" Style="{StaticResource MainTextBoxStyle}"/>
+                </DockPanel>
+            </StackPanel>
+            
         </Border>
 
-        <Border Grid.Column="1" Background="Aqua"
-                Margin="20 300 20 20"
-                HorizontalAlignment="Stretch" VerticalAlignment="Top">
+        <Border Grid.Column="3" Grid.Row="1" Background="#2C2C2C"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Width="210">
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="5*"/>
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="5">
-                    <TextBlock Text="Description" Margin="2"/>
-                    <TextBlock Text="Articul" Margin="2 45 2 2"/>
-                </StackPanel>
-
-                <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Margin="5">
-                    <TextBox Margin="2" x:Name="TBDescription" Height="50" TextWrapping="Wrap"/>
-                    <TextBox Margin="2 10 2 2" x:Name="TBArticul"/>
-
-                </StackPanel>
-            </Grid>
-
+            <StackPanel Orientation="Vertical">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Description" Margin="8 2 2 2"
+                               Foreground="#B6E7FD"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox DockPanel.Dock="Right" Margin="5" HorizontalAlignment="Left"
+                             TextWrapping="Wrap"
+                             x:Name="TBDescription" Style="{StaticResource DescriptionTextBoxStyle}"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Articul" Margin="8 2 2 2"
+                               Foreground="#B6E7FD"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox DockPanel.Dock="Right" Margin="5" HorizontalAlignment="Left"
+                             x:Name="TBArticul" Style="{StaticResource CenterTextBoxStyle}"/>
+                </DockPanel>
+            </StackPanel>
         </Border>
 
+        <Button Grid.ColumnSpan="3" Grid.Row="2" Content="Изменить" x:Name="btnAdd" 
+                HorizontalAlignment="Right" VerticalAlignment="Center"
+                Width="150" Height="50" Margin="15" Click="btnEdit_Click"
+                Style="{StaticResource mainButtonStyle}"/>
+
+        <Button Grid.ColumnSpan="3" Grid.Row="2" Content="Назад" x:Name="btnExit" 
+        HorizontalAlignment="Left" VerticalAlignment="Center"
+        Width="150" Height="50" Margin="15" Click="btnExit_Click"
+        Style="{StaticResource secoundaryButtonStyle}"/>
 
 
-        <Button Grid.ColumnSpan="2" Content="Изменить" x:Name="btnAdd" 
-                HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                Width="250" Height="50" Margin="5" Click="btnEdit_Click"/>
     </Grid>
 </Window>
