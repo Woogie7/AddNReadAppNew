@@ -37,6 +37,8 @@ namespace AddNReadApp
 
 			listView1.Items.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
 
+			countProduct.Text = listView1.Items.Count.ToString();
+
 			borders = GetBorders();
 		}
 
@@ -237,6 +239,7 @@ namespace AddNReadApp
 		{
 			AddDataWin addDataWin = new AddDataWin();
 			addDataWin.ShowDialog();
+			countProduct.Text = listView1.Items.Count.ToString();
 		}
 
 		private void editButton_Click(object sender, RoutedEventArgs e)
@@ -263,6 +266,7 @@ namespace AddNReadApp
 				_db.SaveChanges();
 				listViewPub.ItemsSource = _db.Product.ToList();
 				MessageBox.Show("Удаление прошло удачно", "Сообщение", MessageBoxButton.OK);
+				countProduct.Text = listView1.Items.Count.ToString();
 			}
 			catch
 			{
@@ -274,9 +278,9 @@ namespace AddNReadApp
 		{
 			ScrollViewer scrollviewer = sender as ScrollViewer;
 			if (e.Delta > 0)
-				scrollviewer.LineDown();
-			else
 				scrollviewer.LineUp();
+			else
+				scrollviewer.LineDown();
 			e.Handled = true;
 		}
 	}
