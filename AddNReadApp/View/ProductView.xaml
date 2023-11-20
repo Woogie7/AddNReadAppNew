@@ -6,7 +6,90 @@
              xmlns:local="clr-namespace:AddNReadApp.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <UserControl.Resources>
+        <Style x:Key="ContentBorder">
+            <Style.Setters>
+                <Setter Property="Border.Background" Value="#fff" />
+                <Setter Property="Border.Padding" Value="5"/>
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
+
+    <Border Name="ProductBorder" Style="{StaticResource ContentBorder}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <ComboBox Name="sortDir" Width="150" SelectedIndex="0" 
+                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ComboBox Name="sortProp" Width="150" SelectedIndex="0" 
+                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox x:Name="filter" Width="150" 
+                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button x:Name="addButton" Content="Добавить"/>
+                <Button Content="Edit" x:Name="editButton"  Width="150" 
+                    VerticalAlignment="Center"/>
+                <Button Content="Delete" x:Name="delButton" Width="150" 
+                    VerticalAlignment="Center" Command="{Binding DeleteCommand}"/>
+                <TextBlock x:Name="countProduct" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" CanContentScroll="True">
+                <ListView x:Name="listView1" FontSize="18" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="{Binding CurectImage}" Grid.Column="0" 
+                                         HorizontalAlignment="Center" VerticalAlignment="Center"
+                                ></Image>
+
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Margin="15 0 0 15"/>
+
+                                    <TextBlock TextWrapping="Wrap" Margin="15 0 0 15">
+                                            <Run Text="Цена"></Run>
+                                            <Run Text="{Binding Price}"></Run>
+										    <Run Text="Макс скидка"></Run>
+                                            <Run Text="{Binding Max_discount}"></Run>
+										    <Run Text="Скидка"></Run>
+                                            <Run Text="{Binding Current_discount}"></Run>
+                                    </TextBlock>
+
+                                    <TextBlock TextWrapping="Wrap" Margin="15 0 0 15">
+                                            <Run Text="Поставщик"></Run>
+                                            <Run Text="{Binding Provider}"></Run>
+  											<Run Text="Производитель"></Run>
+                                            <Run Text="{Binding Manufacturer}"></Run>
+                                    </TextBlock>
+
+                                    <TextBlock TextWrapping="Wrap" Margin="15 0 0 15">
+                                            <Run Text="Категория"></Run>
+                                            <Run Text="{Binding Category}"></Run>
+		    								<Run Text="Количество"></Run>
+                                            <Run Text="{Binding Quantity}"></Run>
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="{Binding Description}" Margin="15 0 0 15"/>
+                                    <TextBlock Text="{Binding Articul}" Margin="15 0 0 15"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+        </Grid>
+    </Border>
 </UserControl>
+    
+

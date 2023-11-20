@@ -4,9 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AddNReadApp"
+        xmlns:view="clr-namespace:AddNReadApp.View"
+        xmlns:vms="clr-namespace:AddNReadApp.ViewModel"
         mc:Ignorable="d"
         MinHeight="450" MinWidth="525" Height="450" Width="600">
     <Window.Resources>
+        <DataTemplate DataType="{x:Type vms:ProductViewModel}">
+            <view:ProductView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:}">
+            <view:ProductView/>
+        </DataTemplate>
+ 
+        
         <Style x:Key="ContentBorder">
 			<Style.Setters>
 				<Setter Property="Border.Background" Value="#fff" />
@@ -108,21 +118,23 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal" Name="NotAuthPanel" Style="{StaticResource UserMenuPanel}" Visibility="Visible">
-                        <Button Content="Вход" Name="LogInButton" Click="LogInButton_Click" Style="{StaticResource mainButtonStyle}"/>
-						<Button Content="Регистрация" Name="SignUpButton" Click="SignUpButton_Click" Style="{StaticResource mainButtonStyle}"/>
+                        <Button Content="Вход" Name="LogInButton" Style="{StaticResource mainButtonStyle}"/>
+						<Button Content="Регистрация" Name="SignUpButton" Style="{StaticResource mainButtonStyle}"/>
 					</StackPanel>
                     <StackPanel Orientation="Horizontal" Name="AuthPanel" Style="{StaticResource UserMenuPanel}">
-                        <Button Content="Продукт" Name="ProductButton" Click="ProductButton_Click" Style="{StaticResource mainButtonStyle}"/>
-                        <Button Content="Аккаунт" Name="AccountButton" Click="AccountButton_Click" Style="{StaticResource mainButtonStyle}"/>
-                        <Button Content="Выход" Name="LogOutButton" Click="LogOutButton_Click" Style="{StaticResource mainButtonStyle}"/>
+                        <Button Content="Продукт" Name="ProductButton" Style="{StaticResource mainButtonStyle}"/>
+                        <Button Content="Аккаунт" Name="AccountButton" Style="{StaticResource mainButtonStyle}"/>
+                        <Button Content="Выход" Name="LogOutButton" Style="{StaticResource mainButtonStyle}"/>
                     </StackPanel>
                 </Grid>
 			</Border>
-			
-            
-            
+
+
+            <view:ProductView Grid.Row="1" DataContext="{Binding CurrentViewModel}"/>
+
+
             <!--Контентная часть-->
-			<Border Name="ContentBorders" Grid.Row="1">
+			<!--<Border Name="ContentBorders" Grid.Row="1">
 				<Grid>
                     
                     <Border Name="HomeBorder" Style="{StaticResource ContentBorder}" Visibility="Visible">
@@ -194,87 +206,8 @@
                             </StackPanel>
                         </ScrollViewer>
                     </Border>
-
-                    <Border Name="ProductBorder" Style="{StaticResource ContentBorder}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <StackPanel Orientation="Horizontal">
-                                <ComboBox Name="sortDir" Width="150" SelectedIndex="0" 
-                                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <ComboBox Name="sortProp" Width="150" SelectedIndex="0" 
-                                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <TextBox x:Name="filter" Width="150" TextChanged="filter_TextChanged"
-                                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <Button x:Name="addButton" Content="Добавить" Click="addButton_Click"/>
-                                <Button Content="Edit" x:Name="editButton"  Width="150" 
-                                        VerticalAlignment="Center" Click="editButton_Click"/>
-                                <Button Content="Delete" x:Name="delButton" Width="150" 
-                                        VerticalAlignment="Center" Click="delButton_Click"/>
-                                <TextBlock x:Name="countProduct" 
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </StackPanel>
-
-
-                            <ScrollViewer Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible"
-                                          PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-                                <ListView x:Name="listView1" FontSize="18">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Margin="5">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-
-                                                <Image Source="{Binding CurectImage}" Grid.Column="0" 
-                                                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                   ></Image>
-
-                                                <StackPanel Grid.Column="1">
-                                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Margin="15 0 0 15"/>
-
-                                                    <TextBlock TextWrapping="Wrap" Margin="15 0 0 15">
-                                                        <Run Text="Цена"></Run>
-                                                        <Run Text="{Binding Price}"></Run>
-													    <Run Text="Макс скидка"></Run>
-                                                        <Run Text="{Binding Max_discount}"></Run>
-													    <Run Text="Скидка"></Run>
-                                                        <Run Text="{Binding Current_discount}"></Run>
-                                                    </TextBlock>
-
-                                                    <TextBlock TextWrapping="Wrap" Margin="15 0 0 15">
-                                                        <Run Text="Поставщик"></Run>
-                                                        <Run Text="{Binding Provider}"></Run>
-	    												<Run Text="Производитель"></Run>
-                                                        <Run Text="{Binding Manufacturer}"></Run>
-                                                    </TextBlock>
-
-                                                    <TextBlock TextWrapping="Wrap" Margin="15 0 0 15">
-                                                        <Run Text="Категория"></Run>
-                                                        <Run Text="{Binding Category}"></Run>
-					    								<Run Text="Количество"></Run>
-                                                        <Run Text="{Binding Quantity}"></Run>
-                                                    </TextBlock>
-                                                </StackPanel>
-
-                                                <StackPanel Grid.Column="2">
-                                                    <TextBlock Text="{Binding Description}" Margin="15 0 0 15"/>
-                                                    <TextBlock Text="{Binding Articul}" Margin="15 0 0 15"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </ScrollViewer>
-                        </Grid>
-                    </Border>
                 </Grid>
-			</Border>
+			</Border>-->
 		</Grid>
 	</Border>
 </Window>

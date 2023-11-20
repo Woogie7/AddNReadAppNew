@@ -35,11 +35,11 @@ namespace AddNReadApp
 			{
 				if (String.IsNullOrEmpty(Image) || String.IsNullOrWhiteSpace(Image))
 				{
-					return "Images/picture.png";
+					return "../Images/picture.png";
 				}
 				else
 				{
-					return $"Images/{Image}";
+					return $"../Images/{Image}";
 				}
 			}
 		}
