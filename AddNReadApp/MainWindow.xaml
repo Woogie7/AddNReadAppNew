@@ -12,8 +12,8 @@
         <DataTemplate DataType="{x:Type vms:ProductViewModel}">
             <view:ProductView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vms:}">
-            <view:ProductView/>
+        <DataTemplate DataType="{x:Type vms:LoginUserViewModel}">
+            <view:LoginUserView/>
         </DataTemplate>
  
         
@@ -33,9 +33,8 @@
 		</Style>
 
 		<Style x:Key="UserMenuPanel">
-			<Style.Setters>
-				<Setter Property="StackPanel.Visibility" Value="Hidden" />
-				<Setter Property="StackPanel.HorizontalAlignment" Value="Right" />
+            <Style.Setters>
+                <Setter Property="StackPanel.HorizontalAlignment" Value="Right" />
 				<Setter Property="Grid.Column" Value="1"/>
 			</Style.Setters>
 		</Style>
@@ -117,7 +116,7 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Horizontal" Name="NotAuthPanel" Style="{StaticResource UserMenuPanel}" Visibility="Visible">
+                    <!--<StackPanel Orientation="Horizontal" Name="NotAuthPanel" Style="{StaticResource UserMenuPanel}" Visibility="Visible">
                         <Button Content="Вход" Name="LogInButton" Style="{StaticResource mainButtonStyle}"/>
 						<Button Content="Регистрация" Name="SignUpButton" Style="{StaticResource mainButtonStyle}"/>
 					</StackPanel>
@@ -125,12 +124,17 @@
                         <Button Content="Продукт" Name="ProductButton" Style="{StaticResource mainButtonStyle}"/>
                         <Button Content="Аккаунт" Name="AccountButton" Style="{StaticResource mainButtonStyle}"/>
                         <Button Content="Выход" Name="LogOutButton" Style="{StaticResource mainButtonStyle}"/>
+                    </StackPanel>-->
+                    <StackPanel Orientation="Horizontal" Name="AuthPanel" Style="{StaticResource UserMenuPanel}">
+                        <Button Content="Продукт" Name="ProductButton" Style="{StaticResource mainButtonStyle}" Command="{Binding ProductNavigateCommand}"/>
+                        <Button Content="Аккаунт" Name="AccountButton" Style="{StaticResource mainButtonStyle}"/>
+                        <Button Content="Выход" Name="LogOutButton" Style="{StaticResource mainButtonStyle}" Command="{Binding LoginNavigateCommand}"/>
                     </StackPanel>
                 </Grid>
 			</Border>
 
 
-            <view:ProductView Grid.Row="1" DataContext="{Binding CurrentViewModel}"/>
+            <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}"/>
 
 
             <!--Контентная часть-->

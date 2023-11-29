@@ -67,6 +67,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\DeleteProductCommand.cs" />
+    <Compile Include="Command\LoginUserCommand.cs" />
+    <Compile Include="Command\NavigateCommand.cs" />
     <Compile Include="Core\ObservaleObject.cs" />
     <Compile Include="Core\BaseCommand.cs" />
     <Compile Include="Database.cs" />
@@ -91,6 +93,9 @@
     <Compile Include="Role.cs">
       <DependentUpon>ModelProduct.tt</DependentUpon>
     </Compile>
+    <Compile Include="Service\NavigationService.cs" />
+    <Compile Include="Service\ProductProviders\IProductProvider.cs" />
+    <Compile Include="Service\ProductProviders\ProductProvider.cs" />
     <Compile Include="Store\NavigationStore.cs" />
     <Compile Include="User.cs">
       <DependentUpon>ModelProduct.tt</DependentUpon>
@@ -106,6 +111,9 @@
     </Compile>
     <Compile Include="View\EditDataWin.xaml.cs">
       <DependentUpon>EditDataWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginUserView.xaml.cs">
+      <DependentUpon>LoginUserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProductView.xaml.cs">
       <DependentUpon>ProductView.xaml</DependentUpon>
@@ -140,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditDataWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

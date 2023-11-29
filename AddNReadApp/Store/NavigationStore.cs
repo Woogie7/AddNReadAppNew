@@ -16,8 +16,16 @@ namespace AddNReadApp.Store
 			get { return _currentViewModel; }
 			set 
 			{ 
-				_currentViewModel = value; 
+				_currentViewModel = value;
+				OnCurrentViewModelChanged();
 			}
 		}
+
+		private void OnCurrentViewModelChanged()
+		{
+			CurrentViewModelChanged?.Invoke();
+		}
+
+		public event Action CurrentViewModelChanged;
 	}
 }
