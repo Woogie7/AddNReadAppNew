@@ -51,7 +51,7 @@ namespace AddNReadApp
 
 		private ProductViewModel createProductViewModel()
 		{
-			return new ProductViewModel(_db, new NavigationService(_navigationStore, createUserViewModel), productProvider);
+			return ProductViewModel.LoadViewModel(_db, new NavigationService(_navigationStore, createUserViewModel), productProvider);
 		}
 	}
 }

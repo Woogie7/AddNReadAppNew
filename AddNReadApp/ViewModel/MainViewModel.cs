@@ -4,9 +4,11 @@ using AddNReadApp.Service;
 using AddNReadApp.Store;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace AddNReadApp.ViewModel
@@ -15,8 +17,6 @@ namespace AddNReadApp.ViewModel
 	{
 		private readonly NavigationStore _navigationStore;
 		public ObservaleObject CurrentViewModel => _navigationStore.CurrentViewModel;
-
-
 
 		public ICommand ProductNavigateCommand { get; }
 		public ICommand LoginNavigateCommand { get; }

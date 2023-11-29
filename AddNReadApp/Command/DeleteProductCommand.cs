@@ -35,12 +35,12 @@ namespace AddNReadApp.Command
 		}
 		public override void Execute(object parameter)
 		{
-			int ID =(_productViewModel.SelectedProduct.ID);
-			Product deleteProduct = (from m in _db.Product where m.ID == ID select m).SingleOrDefault();
-			_db.Product.Remove(deleteProduct);
-			_db.SaveChanges();
-			_productViewModel.Products.Remove(deleteProduct);
-			MessageBox.Show("Удаление прошло удачно", "Сообщение", MessageBoxButton.OK);
+			//int ID =(_productViewModel.SelectedProduct.ID);
+			//Product deleteProduct = (from m in _db.Product where m.ID == ID select m).SingleOrDefault();
+			//_db.Product.Remove(deleteProduct);
+			//_db.SaveChanges();
+			//_productViewModel.Products.Remove(deleteProduct);
+			//MessageBox.Show("Удаление прошло удачно", "Сообщение", MessageBoxButton.OK);
 		}
 	}
 }

@@ -9,5 +9,6 @@ namespace AddNReadApp.Service.ProductProviders
 	internal interface IProductProvider
 	{
 		Task<IEnumerable<Product>> GetProductsAsync();
+		IEnumerable<Product> GetProducts();
 	}
 }

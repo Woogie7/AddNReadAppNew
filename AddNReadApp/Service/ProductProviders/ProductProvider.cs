@@ -16,6 +16,11 @@ namespace AddNReadApp.Service.ProductProviders
 			_db = DB;
 		}
 
+		public IEnumerable<Product> GetProducts()
+		{
+			return _db.Product.ToList();
+		}
+
 		public async Task<IEnumerable<Product>> GetProductsAsync()
 		{
 			return await _db.Product.ToListAsync();

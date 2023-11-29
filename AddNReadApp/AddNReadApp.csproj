@@ -66,6 +66,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\AsyncCommand\AsyncComandBase.cs" />
+    <Compile Include="Command\AsyncCommand\LoadProductCommandAsync.cs" />
     <Compile Include="Command\DeleteProductCommand.cs" />
     <Compile Include="Command\LoginUserCommand.cs" />
     <Compile Include="Command\NavigateCommand.cs" />
