@@ -18,10 +18,7 @@ namespace AddNReadApp.ViewModel
 	{
 		private readonly Entities _db;
 		private readonly IProductProvider _productProvider;
-
-		private readonly ObservableCollection<Product> _products;
-
-		public ObservableCollection<Product> Products => _products;
+		public ObservableCollection<Product> Products { get; private set; }
 
 		public ICommand DeleteCommand { get;}
 		public ICommand EditCommand { get;}
@@ -34,6 +31,8 @@ namespace AddNReadApp.ViewModel
 
 			DeleteCommand = new DeleteProductCommand(this, DB);
 			LoadProductCommandAsync = new LoadProductCommandAsync(this);
+
+			Products = new ObservableCollection<Product>(_db.Product.ToList());
 		}
 
 		public static ProductViewModel LoadViewModel(Entities DB, IProductProvider productProvider)
@@ -47,7 +46,7 @@ namespace AddNReadApp.ViewModel
 
 		public void UpdateProductLoad(ObservableCollection<Product> products)
 		{
-			_products.Clear();
+			Products = new ObservableCollection<Product>(_db.Product.ToList());
 		}
 
 
