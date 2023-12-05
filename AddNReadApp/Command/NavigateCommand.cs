@@ -3,10 +3,10 @@ using AddNReadApp.Service;
 
 namespace AddNReadApp.Command
 {
-	internal class NavigateCommand : BaseCommand
+	internal class NavigateCommand<TViewModel> : BaseCommand where TViewModel : ObservaleObject
 	{
-		private readonly NavigationService _navigationService;
-		public NavigateCommand(NavigationService navigationService)
+		private readonly NavigationService<TViewModel> _navigationService;
+		public NavigateCommand(NavigationService<TViewModel> navigationService)
 		{
 			_navigationService = navigationService;
 		}

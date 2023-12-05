@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace AddNReadApp.Service
 {
-	internal class NavigationService
+	internal class NavigationService<TViewModel> where TViewModel : ObservaleObject
 	{
 		private readonly NavigationStore _navigationStore;
-		private readonly Func<ObservaleObject> _createViewModel;
+		private readonly Func<TViewModel> _createViewModel;
 
-		public NavigationService(NavigationStore navigationStore, Func<ObservaleObject> createViewModel)
+		public NavigationService(NavigationStore navigationStore, Func<TViewModel> createViewModel)
 		{
 			_navigationStore = navigationStore;
 			_createViewModel = createViewModel;

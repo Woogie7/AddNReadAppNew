@@ -19,33 +19,35 @@ namespace AddNReadApp.ViewModel
 		private readonly Entities _db;
 		private readonly IProductProvider _productProvider;
 
-		public IEnumerable<Product> Products {  get; private set; }
+		private readonly ObservableCollection<Product> _products;
+
+		public ObservableCollection<Product> Products => _products;
 
 		public ICommand DeleteCommand { get;}
 		public ICommand EditCommand { get;}
 		public ICommand LoadProductCommandAsync { get;}
-		public ProductViewModel(Entities DB, NavigationService navigationService, IProductProvider productProvider)
+
+		public ProductViewModel(Entities DB, IProductProvider productProvider)
 		{
 			_db = DB;
 			_productProvider = productProvider;
 
 			DeleteCommand = new DeleteProductCommand(this, DB);
-			EditCommand = new NavigateCommand(navigationService);
 			LoadProductCommandAsync = new LoadProductCommandAsync(this);
 		}
 
-		public static ProductViewModel LoadViewModel(Entities DB, NavigationService navigationService, IProductProvider productProvider)
+		public static ProductViewModel LoadViewModel(Entities DB, IProductProvider productProvider)
 		{
-			ProductViewModel productViewModel = new ProductViewModel(DB, navigationService, productProvider);
+			ProductViewModel productViewModel = new ProductViewModel(DB, productProvider);
 
 			productViewModel.LoadProductCommandAsync.Execute(null);
 
 			return productViewModel;
 		}
 
-		public void UpdateProductLoad(IEnumerable<Product> products)
+		public void UpdateProductLoad(ObservableCollection<Product> products)
 		{
-			Products = products;
+			_products.Clear();
 		}
 
 

@@ -1,15 +1,12 @@
 ﻿using AddNReadApp.Service;
 using AddNReadApp.Service.ProductProviders;
 using AddNReadApp.Store;
-using AddNReadApp.View;
 using AddNReadApp.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Navigation;
 
 namespace AddNReadApp
 {
@@ -18,40 +15,60 @@ namespace AddNReadApp
 	/// </summary>
 	public partial class App : Application
 	{
-		private readonly Entities _db; 
-		private readonly NavigationStore _navigationStore;
-		IProductProvider productProvider;
+		private readonly IHost _host;
 
 		public App()
 		{
-			_db = new Entities();
-			_navigationStore = new NavigationStore();
+			_host = Host.CreateDefaultBuilder()
+				.ConfigureServices(service =>
+				{
+					service.AddSingleton<IProductProvider, ProductProvider>();
+					service.AddSingleton<Entities>();
+					service.AddSingleton<NavigationStore>();
+					service.AddSingleton<MainViewModel>();
 
-			productProvider = new ProductProvider(_db);
+					service.AddTransient((s) => CreateProductViewModel(s));
+					service.AddSingleton<Func<ProductViewModel>>(s => () => s.GetRequiredService<ProductViewModel>());
+					service.AddSingleton<NavigationService<ProductViewModel>>();
+
+					service.AddSingleton<LoginUserViewModel>();
+					service.AddSingleton<Func<LoginUserViewModel>>(s => () => s.GetRequiredService<LoginUserViewModel>());
+					service.AddSingleton<NavigationService<LoginUserViewModel>>();
+
+					service.AddSingleton<NavigationService<ProductViewModel>>();
+					service.AddSingleton<NavigationService<LoginUserViewModel>>();
+
+					service.AddSingleton<MainWindow>(s => new MainWindow()
+					{
+						DataContext = s.GetRequiredService<MainViewModel>()
+					});
+				})
+				.Build();
+		}
+
+		private ProductViewModel CreateProductViewModel(IServiceProvider s)
+		{
+			return ProductViewModel.LoadViewModel(s.GetRequiredService<Entities>(), s.GetRequiredService<IProductProvider>());
 		}
 
 		protected override void OnStartup(StartupEventArgs e)
 		{
-			_navigationStore.CurrentViewModel = createUserViewModel();
-			MainWindow = new MainWindow()
-			{
-				DataContext = new MainViewModel(_navigationStore, new NavigationService(_navigationStore, createUserViewModel), 
-								new NavigationService(_navigationStore, createProductViewModel))
-			};
+			_host.Start();
 
+			NavigationService<ProductViewModel> navigationService = _host.Services.GetRequiredService<NavigationService<ProductViewModel>>();
+			navigationService.Navigate();
+
+			MainWindow = _host.Services.GetRequiredService<MainWindow>();
 			MainWindow.Show();
 
 			base.OnStartup(e);
 		}
 
-		private LoginUserViewModel createUserViewModel()
+		protected override void OnExit(ExitEventArgs e)
 		{
-			return new LoginUserViewModel(new NavigationService(_navigationStore, createProductViewModel));
-		}
+			_host.Dispose();
 
-		private ProductViewModel createProductViewModel()
-		{
-			return ProductViewModel.LoadViewModel(_db, new NavigationService(_navigationStore, createUserViewModel), productProvider);
+			base.OnExit(e);
 		}
 	}
 }

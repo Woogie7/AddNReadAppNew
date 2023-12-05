@@ -21,12 +21,12 @@ namespace AddNReadApp.ViewModel
 		public ICommand ProductNavigateCommand { get; }
 		public ICommand LoginNavigateCommand { get; }
 
-		public MainViewModel(NavigationStore navigationStore, NavigationService loginUserNavigationService, NavigationService productNavigationService) 
+		public MainViewModel(NavigationStore navigationStore, NavigationService<LoginUserViewModel> loginUserNavigationService, NavigationService<ProductViewModel> productNavigationService) 
 		{
 			_navigationStore = navigationStore;
 
-			LoginNavigateCommand = new NavigateCommand(loginUserNavigationService);
-			ProductNavigateCommand = new NavigateCommand(productNavigationService);
+			LoginNavigateCommand = new NavigateCommand<LoginUserViewModel>(loginUserNavigationService);
+			ProductNavigateCommand = new NavigateCommand<ProductViewModel>(productNavigationService);
 
 			_navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 		}

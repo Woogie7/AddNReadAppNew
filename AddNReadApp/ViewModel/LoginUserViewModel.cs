@@ -11,9 +11,9 @@ namespace AddNReadApp.ViewModel
 	{
 		public ICommand LoginNavigateCommand { get; }
 
-		public LoginUserViewModel(NavigationService navigationService)
+		public LoginUserViewModel(NavigationService<ProductViewModel> navigationService)
 		{
-			LoginNavigateCommand = new NavigateCommand(navigationService);
+			LoginNavigateCommand = new NavigateCommand<ProductViewModel>(navigationService);
 		}
 	}
 }
