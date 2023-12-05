@@ -12,8 +12,8 @@ namespace DAL.Entityes
 		public virtual Category Category { get; set; }
 		public virtual Provider Provider { get; set; }
 		public virtual Manufacturer Manufacturer { get; set; }
-		public string Description { get; set; }
-		public string Articul { get; set; }
+		public string? Description { get; set; }
+		public string? Articul { get; set; }
 
 	}
 }

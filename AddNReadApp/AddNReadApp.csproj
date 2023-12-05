@@ -223,6 +223,7 @@
     <Compile Include="Command\DeleteProductCommand.cs" />
     <Compile Include="Command\LoginUserCommand.cs" />
     <Compile Include="Command\NavigateCommand.cs" />
+    <Compile Include="Core\DBRegistrator.cs" />
     <Compile Include="Core\ObservaleObject.cs" />
     <Compile Include="Core\BaseCommand.cs" />
     <Compile Include="Database.cs" />
@@ -336,6 +337,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelProduct.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="appsetting.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="ModelProduct.edmx.diagram">
       <DependentUpon>ModelProduct.edmx</DependentUpon>
     </None>
