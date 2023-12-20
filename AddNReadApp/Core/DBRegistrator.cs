@@ -7,8 +7,6 @@ namespace AddNReadApp.Core
 {
 	internal class DBRegistrator
 	{
-		public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration) => services
-			.AddDBContext();
-		;
+		
 	}
 }
