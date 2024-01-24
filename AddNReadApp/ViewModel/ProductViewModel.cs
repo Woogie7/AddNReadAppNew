@@ -19,9 +19,11 @@ namespace AddNReadApp.ViewModel
 		private readonly Entities _db;
 		private readonly IProductProvider _productProvider;
 		public ObservableCollection<Product> Products { get; private set; }
+		public ObservableCollection<Product> cartProduct { get; private set; }
 
 		public ICommand DeleteCommand { get;}
 		public ICommand EditCommand { get;}
+		public ICommand AddProductCartCommand { get;}
 		public ICommand LoadProductCommandAsync { get;}
 
 		public ProductViewModel(Entities DB, IProductProvider productProvider)
@@ -31,8 +33,10 @@ namespace AddNReadApp.ViewModel
 
 			DeleteCommand = new DeleteProductCommand(this, DB);
 			LoadProductCommandAsync = new LoadProductCommandAsync(this);
+			AddProductCartCommand = new AddProductCartCommand(this);
 
-			Products = new ObservableCollection<Product>(_db.Product.ToList());
+			cartProduct = new ObservableCollection<Product>();
+            Products = new ObservableCollection<Product>(_db.Product.ToList());
 		}
 
 		public static ProductViewModel LoadViewModel(Entities DB, IProductProvider productProvider)
@@ -67,5 +71,17 @@ namespace AddNReadApp.ViewModel
 			}
 		}
 
-	}
+        private int countCart;
+
+        public int CountCart
+        {
+            get { return countCart; }
+            set 
+			{ 
+				countCart = value;
+				OnPropertyChanged();
+			}
+        }
+
+    }
 }

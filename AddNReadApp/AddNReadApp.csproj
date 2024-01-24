@@ -220,6 +220,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\AddProductCartCommand.cs" />
     <Compile Include="Command\AsyncCommand\AsyncComandBase.cs" />
     <Compile Include="Command\AsyncCommand\LoadProductCommandAsync.cs" />
     <Compile Include="Command\DeleteProductCommand.cs" />
@@ -263,6 +264,9 @@
     <Compile Include="View\AddDataWin.xaml.cs">
       <DependentUpon>AddDataWin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CartProduct.xaml.cs">
+      <DependentUpon>CartProduct.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Control\InputForm.xaml.cs">
       <DependentUpon>InputForm.xaml</DependentUpon>
     </Compile>
@@ -297,6 +301,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddDataWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CartProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

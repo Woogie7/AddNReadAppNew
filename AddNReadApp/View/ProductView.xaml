@@ -34,8 +34,11 @@
                     VerticalAlignment="Center" Command="{Binding EditCommand}"/>
                 <Button Content="Delete" x:Name="delButton" Width="150" 
                     VerticalAlignment="Center" Command="{Binding DeleteCommand}"/>
-                <TextBlock x:Name="countProduct" 
+                <TextBlock x:Name="countProduct" Text="{Binding CountCart}"
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Button Content="Добавить в карзину" x:Name="addProductInCart" Width="150" 
+                            VerticalAlignment="Center" Command="{Binding AddProductCartCommand}"/>
             </StackPanel>
             <ScrollViewer Grid.Row="1" CanContentScroll="True">
                 <ListView x:Name="listView1" FontSize="18" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}">
