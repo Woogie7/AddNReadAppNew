@@ -16,6 +16,10 @@ namespace AddNReadApp.Service.CartProviders
 			_db = DB;
 		}
 
+		public Cart GetCartById(int ID)
+		{
+			return _db.Cart.FirstOrDefault(c => c.IDCart == ID);
+		}
 		public IEnumerable<Cart> GetCart()
 		{
 			return _db.Cart.ToList();

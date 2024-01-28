@@ -1,44 +1,44 @@
 ﻿using AddNReadApp.Core;
+using AddNReadApp.Service.CartProviders;
 using AddNReadApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AddNReadApp.Command
 {
 	internal class DeleteCartCommand : BaseCommand
 	{
-		private readonly Entities _db;
 		private readonly CartViewModel _cartViewModel;
-		public DeleteCartCommand(CartViewModel cartViewModel, Entities DB)
-		{
-			_db = DB;
-			_cartViewModel = cartViewModel;
-			_cartViewModel.PropertyChanged += OnProductViewModelPropertyChanged;
-		}
+		private readonly ICartProvider _cartProvider;
 
-		private void OnProductViewModelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		public DeleteCartCommand(CartViewModel cartViewModel, ICartProvider cartProvider)
 		{
-			if (e.PropertyName == nameof(ProductViewModel.SelectedProduct))
-			{
-				OnCanExecuteChanged();
-			}
+
+			_cartViewModel = cartViewModel;
+			_cartProvider = cartProvider;
 		}
 
 		public override bool CanExecute(object parameter)
 		{
-			return _productViewModel.SelectedProduct != null;
+			return true;
 		}
 		public override void Execute(object parameter)
 		{
-			//int ID =(_productViewModel.SelectedProduct.ID);
-			//Product deleteProduct = (from m in _db.Product where m.ID == ID select m).SingleOrDefault();
-			//_db.Product.Remove(deleteProduct);
-			//_db.SaveChanges();
-			//_productViewModel.Products.Remove(deleteProduct);
-			//MessageBox.Show("Удаление прошло удачно", "Сообщение", MessageBoxButton.OK);
+			if (parameter is Cart cartItem)
+			{
+				int ID = cartItem.IDCart;
+				Cart deleteCart = _cartProvider.GetCartById(ID);
+
+				_cartProvider.RemoveFromCartAsync(deleteCart);
+
+				_cartViewModel.CartProduct.Remove(deleteCart);
+				MessageBox.Show("Удаление прошло удачно", "Сообщение", MessageBoxButton.OK);
+			}
+
 		}
 	}
 }

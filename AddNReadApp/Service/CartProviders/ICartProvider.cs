@@ -8,6 +8,7 @@ namespace AddNReadApp.Service.CartProviders
 {
 	internal interface ICartProvider
 	{
+		Cart GetCartById(int ID);
 		Task<IEnumerable<Cart>> GetCartAsync();
 		IEnumerable<Cart> GetCart();
 		Task AddToCartAsync(Cart cartItem);

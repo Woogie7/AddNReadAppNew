@@ -48,8 +48,8 @@
                                     <TextBlock Text="{Binding DateAdded}" FontWeight="Bold"/>
                                 </StackPanel>
 
-                                <!-- Кнопка удаления товара из корзины -->
-                                <Button Content="Удалить" Margin="10,0,0,0"/>
+                                <Button Content="Удалить" Command="{Binding DataContext.DeleteCartCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" 
+                        CommandParameter="{Binding}"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
@@ -58,7 +58,8 @@
 
 
             <!-- Кнопка оформления заказа -->
-        <Button Content="Оформить заказ" Grid.Row="2" HorizontalAlignment="Center" Margin="10"/>
+        <Button Content="Оформить заказ" Grid.Row="2" HorizontalAlignment="Center" Margin="10"
+                Command="{Binding CreatePdfCommand}"/>
     </Grid>
 </Border>
 </UserControl>
