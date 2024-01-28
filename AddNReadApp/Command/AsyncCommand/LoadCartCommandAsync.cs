@@ -1,12 +1,14 @@
-﻿using System;
+﻿using AddNReadApp.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AddNReadApp.Command.AsyncCommand
 {
-	internal class LoadCartCommandAsync : AsyncCommandBase
+	internal class LoadCartCommandAsync : AsyncComandBase
 	{
 		private readonly CartViewModel _cartViewModel;
 

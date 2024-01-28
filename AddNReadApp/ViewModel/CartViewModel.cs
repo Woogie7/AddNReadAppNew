@@ -1,4 +1,5 @@
 ﻿using AddNReadApp.Command;
+using AddNReadApp.Command.AsyncCommand;
 using AddNReadApp.Core;
 using AddNReadApp.Service.CartProviders;
 using AddNReadApp.Service.ProductProviders;
@@ -30,6 +31,7 @@ namespace AddNReadApp.ViewModel
 
 			DeleteCartCommand = new DeleteCartCommand(this, _cartProvider);
 			CreatePdfCommand = new CreatePdfCommand(_cartProvider);
+			LoadCartCommandAsync = new LoadCartCommandAsync(this);
 		}
 
 		public static CartViewModel LoadViewModel(ProductViewModel productViewModel, ICartProvider cartProvider)
@@ -41,7 +43,7 @@ namespace AddNReadApp.ViewModel
 			return cartViewModel;
 		}
 
-		public void UpdateProductLoad(ObservableCollection<Cart> carts)
+		public void UpdateCartLoad(ObservableCollection<Cart> carts)
 		{
 			CartProduct = carts;
 		}
