@@ -1,6 +1,7 @@
 ﻿using AddNReadApp.Command;
 using AddNReadApp.Core;
 using AddNReadApp.Service.CartProviders;
+using AddNReadApp.Service.ProductProviders;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,11 +15,13 @@ namespace AddNReadApp.ViewModel
 	internal class CartViewModel : ObservaleObject
 	{
 		public ObservableCollection<Cart> CartProduct { get; private set; }
+		
 		private readonly ProductViewModel _productViewModel;
 		private readonly ICartProvider _cartProvider;
 
 		public ICommand DeleteCartCommand { get; }
 		public ICommand CreatePdfCommand { get; }
+		public ICommand LoadCartCommandAsync { get; }
 
 		public CartViewModel(ProductViewModel productViewModel, ICartProvider cartProvider)
 		{
@@ -27,15 +30,20 @@ namespace AddNReadApp.ViewModel
 
 			DeleteCartCommand = new DeleteCartCommand(this, _cartProvider);
 			CreatePdfCommand = new CreatePdfCommand(_cartProvider);
-
-			LoadCart(); // Загрузка корзины при инициализации
 		}
 
-		private async void LoadCart()
+		public static CartViewModel LoadViewModel(ProductViewModel productViewModel, ICartProvider cartProvider)
 		{
-			var cartItems = await GetAllCart();
-			CartProduct = new ObservableCollection<Cart>(cartItems);
-			OnPropertyChanged(nameof(CartProduct)); 
+			CartViewModel cartViewModel = new CartViewModel(productViewModel, cartProvider);
+
+			cartViewModel.LoadCartCommandAsync.Execute(null);
+
+			return cartViewModel;
+		}
+
+		public void UpdateProductLoad(ObservableCollection<Cart> carts)
+		{
+			CartProduct = carts;
 		}
 
 		public async Task<IEnumerable<Cart>> GetAllCart()

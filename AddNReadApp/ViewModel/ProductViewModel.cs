@@ -21,7 +21,6 @@ namespace AddNReadApp.ViewModel
 		private readonly IProductProvider _productProvider;
 		private readonly ICartProvider _cartProvider;
 		public ObservableCollection<Product> Products { get; private set; }
-		public ObservableCollection<Cart> Cart { get; private set; }
 
 		public ICommand DeleteCommand { get;}
 		public ICommand EditCommand { get;}
@@ -38,8 +37,7 @@ namespace AddNReadApp.ViewModel
 			LoadProductCommandAsync = new LoadProductCommandAsync(this);
 			AddProductCartCommand = new AddProductCartCommand(this, _cartProvider);
 
-            Products = new ObservableCollection<Product>(_db.Product.ToList());
-			Cart = new ObservableCollection<Cart>(_db.Cart.ToList());
+			Products = new ObservableCollection<Product>(_db.Product.ToList());
 
 			countCart = _db.Cart.Count();
 		}
@@ -55,7 +53,7 @@ namespace AddNReadApp.ViewModel
 
 		public void UpdateProductLoad(ObservableCollection<Product> products)
 		{
-			Products = new ObservableCollection<Product>(_db.Product.ToList());
+			Products = products;
 		}
 
 

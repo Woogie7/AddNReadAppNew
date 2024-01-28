@@ -49,8 +49,6 @@ namespace AddNReadApp.Command
 					AdditionalInfo = ""
 				};
 
-				//_productViewModel.SelectedProduct as Product;
-
 				_cartProvider.AddToCartAsync(addCartProduct);
 
 				MessageBox.Show($"Успешно добавлено {product.Name}");
@@ -60,9 +58,6 @@ namespace AddNReadApp.Command
             {
 				MessageBox.Show($"Количество было изменино");
 			}
-
-			
-
         }
     }
 }

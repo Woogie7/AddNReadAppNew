@@ -3,11 +3,10 @@ using AddNReadApp.Service.CartProviders;
 using AddNReadApp.Service.ProductProviders;
 using AddNReadApp.Store;
 using AddNReadApp.ViewModel;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
-using System.Windows.Navigation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AddNReadApp
 {
@@ -38,7 +37,7 @@ namespace AddNReadApp
 					service.AddSingleton<Func<LoginUserViewModel>>(s => () => s.GetRequiredService<LoginUserViewModel>());
 					service.AddSingleton<NavigationService<LoginUserViewModel>>();
 
-					service.AddSingleton<CartViewModel>();
+					service.AddSingleton((s) => CreateCartViewModel(s));
 					service.AddSingleton<Func<CartViewModel>>(s => () => s.GetRequiredService<CartViewModel>());
 					service.AddSingleton<NavigationService<CartViewModel>>();
 
@@ -58,6 +57,12 @@ namespace AddNReadApp
 		{
 			return ProductViewModel.LoadViewModel(s.GetRequiredService<Entities>(),
 				s.GetRequiredService<IProductProvider>(), 
+				s.GetRequiredService<ICartProvider>());
+		}
+
+		private CartViewModel CreateCartViewModel(IServiceProvider s)
+		{
+			return CartViewModel.LoadViewModel(s.GetRequiredService<ProductViewModel>(),
 				s.GetRequiredService<ICartProvider>());
 		}
 
