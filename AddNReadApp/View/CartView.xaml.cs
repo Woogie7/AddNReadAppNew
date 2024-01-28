@@ -10,18 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AddNReadApp.View
 {
-    /// <summary>
-    /// Логика взаимодействия для CartProduct.xaml
-    /// </summary>
-    public partial class CartProduct : Window
-    {
-        public CartProduct()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// Interaction logic for CartView.xaml
+	/// </summary>
+	public partial class CartView : UserControl
+	{
+		public CartView()
+		{
+			InitializeComponent();
+		}
+	}
 }

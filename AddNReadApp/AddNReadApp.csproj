@@ -254,18 +254,19 @@
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="Service\ProductProviders\IProductProvider.cs" />
     <Compile Include="Service\ProductProviders\ProductProvider.cs" />
-    <Compile Include="Store\NavigationStore.cs" />
+    <Compile Include="Service\Store\NavigationStore.cs" />
     <Compile Include="User.cs">
       <DependentUpon>ModelProduct.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\CartViewModel.cs" />
     <Compile Include="ViewModel\LoginUserViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="View\AddDataWin.xaml.cs">
       <DependentUpon>AddDataWin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CartProduct.xaml.cs">
-      <DependentUpon>CartProduct.xaml</DependentUpon>
+    <Compile Include="View\CartView.xaml.cs">
+      <DependentUpon>CartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Control\InputForm.xaml.cs">
       <DependentUpon>InputForm.xaml</DependentUpon>
@@ -304,7 +305,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CartProduct.xaml">
+    <Page Include="View\CartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

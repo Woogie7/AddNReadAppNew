@@ -22,8 +22,6 @@ namespace AddNReadApp
 			_host = Host.CreateDefaultBuilder()
 				.ConfigureServices(service =>
 				{
-					
-
 					service.AddSingleton<IProductProvider, ProductProvider>();
 					service.AddSingleton<Entities>();
 					service.AddSingleton<NavigationStore>();

@@ -2,7 +2,7 @@
   "Database": {
     "Type": "MSSQL",
     "ConnectionStrings": {
-      "MSSQL": "Data Source=WOOGIE;Initial Catalog=10210813;Integrated Security=True"
+      "MSSQL": "Data Source=WOOGIE;Initial Catalog=10210813; Integrated Security=True"
     }
 
   }

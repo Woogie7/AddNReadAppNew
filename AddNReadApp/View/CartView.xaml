@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="AddNReadApp.View.CartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:AddNReadApp.View"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="ContentBorder">
+            <Style.Setters>
+                <Setter Property="Border.Background" Value="#fff" />
+                <Setter Property="Border.Padding" Value="5"/>
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
+    
+    <Border Name="ProductBorder" Style="{StaticResource ContentBorder}">
+    <Grid Background="Wheat">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Корзина" FontSize="20" FontWeight="Bold" Margin="10"/>
+
+        <!-- Список товаров в корзине -->
+            <ListBox Grid.Row="1" ItemsSource="{Binding cartProduct}" Margin="10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="{Binding Name}" Margin="0,0,10,0"/>
+                        <TextBlock Text="{Binding Price}" Margin="0,0,10,0"/>
+                        <!-- Кнопка удаления товара из корзины -->
+                        <Button Content="Удалить" Command="{Binding DataContext.RemoveFromCartCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Кнопка оформления заказа -->
+        <Button Content="Оформить заказ" Grid.Row="2" HorizontalAlignment="Center" Margin="10" Command="{Binding CheckoutCommand}"/>
+    </Grid>
+</Border>
+</UserControl>
