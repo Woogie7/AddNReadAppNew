@@ -16,7 +16,7 @@ namespace AddNReadApp
     public partial class Entities : DbContext
     {
         public Entities()
-            : base("name=Entities")
+            : base("name=Entities1")
         {
         }
     
@@ -25,8 +25,10 @@ namespace AddNReadApp
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
     }
 }

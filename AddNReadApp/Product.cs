@@ -12,23 +12,27 @@ namespace AddNReadApp
 	using AddNReadApp.Core;
 	using System;
     using System.Collections.Generic;
-	using System.ComponentModel;
-	using System.Windows.Media;
+    
+    public partial class Product : ObservaleObject
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.Cart = new HashSet<Cart>();
+        }
 
-	public partial class Product : ObservaleObject
-	{
 		private string _image;
-        public int ID { get; set; }
-        public string Articul { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> Price { get; set; }
-        public Nullable<int> Max_discount { get; set; }
-        public string Manufacturer { get; set; }
-        public string Provider { get; set; }
-        public string Category { get; set; }
-        public Nullable<int> Current_discount { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public string Description { get; set; }
+		public int IDProduct { get; set; }
+		public string Articul { get; set; }
+		public string Name { get; set; }
+		public Nullable<int> Price { get; set; }
+		public Nullable<int> Max_discount { get; set; }
+		public string Manufacturer { get; set; }
+		public string Provider { get; set; }
+		public string Category { get; set; }
+		public Nullable<int> Current_discount { get; set; }
+		public Nullable<int> Quantity { get; set; }
+		public string Description { get; set; }
 		public string CurectImage
 		{
 			get
@@ -53,5 +57,8 @@ namespace AddNReadApp
 				OnPropertyChanged(nameof(CurectImage));
 			}
 		}
-	}
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Cart { get; set; }
+    }
 }

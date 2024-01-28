@@ -27,21 +27,38 @@
         <TextBlock Text="Корзина" FontSize="20" FontWeight="Bold" Margin="10"/>
 
         <!-- Список товаров в корзине -->
-            <ListBox Grid.Row="1" ItemsSource="{Binding cartProduct}" Margin="10">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                        <TextBlock Text="{Binding Name}" Margin="0,0,10,0"/>
-                        <TextBlock Text="{Binding Price}" Margin="0,0,10,0"/>
-                        <!-- Кнопка удаления товара из корзины -->
-                        <Button Content="Удалить" Command="{Binding DataContext.RemoveFromCartCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            <ListBox Grid.Row="1" ItemsSource="{Binding CartProduct}" Margin="10" HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Gray" BorderThickness="1" Margin="0,0,0,5" Padding="5">
+                            <StackPanel Orientation="Horizontal">
+                                <!-- Фотография продукта -->
+                                <Image Source="{Binding Product.CurectImage}" Width="200" Height="200" Margin="0,0,10,0"/>
 
-        <!-- Кнопка оформления заказа -->
-        <Button Content="Оформить заказ" Grid.Row="2" HorizontalAlignment="Center" Margin="10" Command="{Binding CheckoutCommand}"/>
+                                <!-- Информация о продукте -->
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Product.Name}" FontWeight="Bold" Margin="0,0,0,5" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Цена: "/>
+                                        <TextBlock Text="{Binding Product.Price}" FontWeight="Bold" Margin="0,0,10,0"/>
+                                        <TextBlock Text="Количество: "/>
+                                        <TextBlock Text="{Binding Quantity}" FontWeight="Bold"/>
+                                    </StackPanel>
+                                    <TextBlock Text="Дата: "/>
+                                    <TextBlock Text="{Binding DateAdded}" FontWeight="Bold"/>
+                                </StackPanel>
+
+                                <!-- Кнопка удаления товара из корзины -->
+                                <Button Content="Удалить" Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+
+            <!-- Кнопка оформления заказа -->
+        <Button Content="Оформить заказ" Grid.Row="2" HorizontalAlignment="Center" Margin="10"/>
     </Grid>
 </Border>
 </UserControl>

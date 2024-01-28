@@ -1,4 +1,5 @@
 ﻿using AddNReadApp.Service;
+using AddNReadApp.Service.CartProviders;
 using AddNReadApp.Service.ProductProviders;
 using AddNReadApp.Store;
 using AddNReadApp.ViewModel;
@@ -23,6 +24,8 @@ namespace AddNReadApp
 				.ConfigureServices(service =>
 				{
 					service.AddSingleton<IProductProvider, ProductProvider>();
+					service.AddSingleton<ICartProvider, CartProvider>();
+
 					service.AddSingleton<Entities>();
 					service.AddSingleton<NavigationStore>();
 					service.AddSingleton<MainViewModel>();
@@ -35,8 +38,13 @@ namespace AddNReadApp
 					service.AddSingleton<Func<LoginUserViewModel>>(s => () => s.GetRequiredService<LoginUserViewModel>());
 					service.AddSingleton<NavigationService<LoginUserViewModel>>();
 
+					service.AddSingleton<CartViewModel>();
+					service.AddSingleton<Func<CartViewModel>>(s => () => s.GetRequiredService<CartViewModel>());
+					service.AddSingleton<NavigationService<CartViewModel>>();
+
 					service.AddSingleton<NavigationService<ProductViewModel>>();
 					service.AddSingleton<NavigationService<LoginUserViewModel>>();
+					service.AddSingleton<NavigationService<CartViewModel>>();
 
 					service.AddSingleton<MainWindow>(s => new MainWindow()
 					{
@@ -48,7 +56,9 @@ namespace AddNReadApp
 
 		private ProductViewModel CreateProductViewModel(IServiceProvider s)
 		{
-			return ProductViewModel.LoadViewModel(s.GetRequiredService<Entities>(), s.GetRequiredService<IProductProvider>());
+			return ProductViewModel.LoadViewModel(s.GetRequiredService<Entities>(),
+				s.GetRequiredService<IProductProvider>(), 
+				s.GetRequiredService<ICartProvider>());
 		}
 
 		protected override void OnStartup(StartupEventArgs e)

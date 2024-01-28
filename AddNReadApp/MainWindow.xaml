@@ -15,8 +15,11 @@
         <DataTemplate DataType="{x:Type vms:LoginUserViewModel}">
             <view:LoginUserView/>
         </DataTemplate>
- 
-        
+        <DataTemplate DataType="{x:Type vms:CartViewModel}">
+            <view:CartView/>
+        </DataTemplate>
+
+
         <Style x:Key="ContentBorder">
 			<Style.Setters>
 				<Setter Property="Border.Background" Value="#fff" />
@@ -126,6 +129,7 @@
                         <Button Content="Выход" Name="LogOutButton" Style="{StaticResource mainButtonStyle}"/>
                     </StackPanel>-->
                     <StackPanel Orientation="Horizontal" Name="AuthPanel" Style="{StaticResource UserMenuPanel}">
+                        <Button Content="Корзина" Name="CartButton" Style="{StaticResource mainButtonStyle}" Command="{Binding CartNavigateCommand}"/>
                         <Button Content="Продукт" Name="ProductButton" Style="{StaticResource mainButtonStyle}" Command="{Binding ProductNavigateCommand}"/>
                         <Button Content="Аккаунт" Name="AccountButton" Style="{StaticResource mainButtonStyle}"/>
                         <Button Content="Выход" Name="LogOutButton" Style="{StaticResource mainButtonStyle}" Command="{Binding LoginNavigateCommand}"/>

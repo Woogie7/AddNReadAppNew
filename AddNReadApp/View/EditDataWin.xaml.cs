@@ -33,7 +33,7 @@ namespace AddNReadApp.View
 			id = productID;
 			FileInfo destinationPath;
 
-			var st = (from m in _db.Product where m.ID == id select m).First();
+			var st = (from m in _db.Product where m.IDProduct == id select m).First();
 			if(String.IsNullOrEmpty(st.Image) || String.IsNullOrWhiteSpace(st.Image))
 			{
 				destinationPath = new FileInfo(System.IO.Path.Combine(startUp, "picture.png"));
@@ -63,7 +63,7 @@ namespace AddNReadApp.View
 			// Получаем информацию о файле из Uri
 			string fileName = System.IO.Path.GetFileName(imageUri.LocalPath);
 
-			Product updateProduct = (from m in _db.Product where m.ID == id select m).Single();
+			Product updateProduct = (from m in _db.Product where m.IDProduct == id select m).Single();
 			updateProduct.Image = fileName;
 			updateProduct.Name = TBName.Text;
 			updateProduct.Price = int.Parse(TBPrice.Text);
